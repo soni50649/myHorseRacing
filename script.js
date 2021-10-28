@@ -1,35 +1,68 @@
 "use strict"
+
+class Horse{
+    element
+    x
+
+constructor(element,y,color){
+    element.style.top= y + "px"
+    element.style.backgroundColor=color
+    element.classList.add("horse")
+    document.body.appendChild(element)
+
+    this.element=element
+    this.x=0
+}
+
+move(){
+    this.element.style.left=this.x + "px"
+    this.x += Math.floor(Math.random()*10)
+}
+
+checkForWin(){
+    if(this.x >=finish){
+        alert("$(colors[h]) horse wins")
+        resetRace();
+    }
+}
+
+reset(){
+    this.x=0
+    }
+}
 const numHorses = 10
 let horses=[]
-let horseX=[]
+
 
 let colors=["red","blue","Cyan","magenta","yellow","Black","turqouise","gray","lilac","white"]
 
 function startRace(){
-    setInterval(move,50)
+    setInterval(moveHorses,50)
 }
 
+function setupHorses(){
 for(let h=0;h<numHorses;h++){
-    horses[h]= document.createElement("div")
-    horses[h].classList.add("horse")
-    horses[h].style.top= 50 + h*18 + "px"
-    horses[h].style.backgroundColor=colors[h]
-    horseX[h]=0
-    document.body.appendChild(horses[h])
+    horses.push(new Horse(document.createElement("div"), 50 + h * 45, colors[h]))
+    }
 }
 
 const finish=500
 
-function move(){
+function moveHorses(){
    for(let h=0;h<numHorses;h++){
-       horses[h].style.left=horseX[h] +"px"
-       horseX[h]+= Math.floor(Math.random()*10)
-       if(horseX[h] >=finish){alert(` ${colors[h]} horse wins`);resetRace();}
+    let horse=horses[h]
+    horse.move()
+    horse.checkForWin()
    } 
-    
+}
+function resetRace() {
+    for(let h=0;h<numHorses;h++){
+    horse[h].reset()
+    }
 }
 
-function startRace(){
+setupHorses()
+/*function startRace(){
 
     setInterval(move,50)  
     alert("On Your Marks. Get Set. GO!")
@@ -43,11 +76,8 @@ let birthyear=prompt("What year you were born broski?")
 
 let str = "firstname"
 alert(firstname.substr(0,2)+ lastname+ birthyear.slice(2,4))
+*/
 
-function resetRace() {
-    for(let h=0;h<numHorses;h++)
-    horseX[h]=0
-}
 
 
 
