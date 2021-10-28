@@ -1,2 +1,2 @@
 # horserace
-Nicks silly horse racing game
+Suraj's funny horse racing game.
